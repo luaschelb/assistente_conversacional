@@ -33,10 +33,10 @@ source venv/bin/activate
 
 ### 3. Instalar Dependências
 
-Com o ambiente virtual ativado, instale os pacotes necessários usando `pip` e o arquivo `requirements.txt`:
+Com o ambiente virtual ativado, instale os pacotes necessários usando `pip`:
 
 ```bash
-pip install -r requirements.txt
+pip install -U pypdf langchain_community langchain-groq langchain_chroma langchain_sentence-transformers langchain-huggingface streamlit
 ```
 
 ### 4. Executar a Aplicação
