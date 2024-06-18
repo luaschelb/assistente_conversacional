@@ -17,9 +17,7 @@ os.environ["GROQ_API_KEY"] = "gsk_V1kNngpvAmSpQImE8ameWGdyb3FY14LvsvjFwQXrMDbSVg
 def load_pdfs(uploaded_files):
     docs = []
     for uploaded_file in uploaded_files:
-        with open(f"./documentos/{uploaded_file.name}", "wb") as f:
-            f.write(uploaded_file.getbuffer())
-        loader = PyPDFLoader(f"./documentos/{uploaded_file.name}")
+        loader = PyPDFLoader(uploaded_file)
         docs.extend(loader.load())
     return docs
 
