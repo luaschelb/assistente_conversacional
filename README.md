@@ -36,7 +36,7 @@ source venv/bin/activate
 Com o ambiente virtual ativado, instale os pacotes necessários usando `pip`:
 
 ```bash
-pip install -U pypdf langchain_community langchain-groq langchain_chroma langchain_sentence-transformers langchain-huggingface streamlit
+pip install -r requirements.txt
 ```
 
 ### 4. Executar a Aplicação
@@ -51,23 +51,9 @@ Isso iniciará a aplicação Streamlit no seu navegador padrão.
 
 ### 5. Upload de Documentos PDF
 
-Para indexar documentos PDF e testar a aplicação, faça upload dos arquivos PDF na pasta `data/documents/`.
+Para indexar documentos PDF e testar a aplicação, faça upload dos arquivos PDF na interface da aplicação.
 
 ### 6. Uso da Aplicação
 
 - Abra a aplicação no navegador após iniciar com `streamlit run app.py`.
 - Insira uma pergunta na interface e veja as respostas baseadas nos documentos PDF indexados.
-
-## Estrutura do Projeto
-
-```
-assistente-conversacional/
-│
-├── app.py                  # Código principal da aplicação Streamlit
-├── requirements.txt        # Lista de dependências do projeto
-├── README.md               # Este arquivo
-└── data/
-    └── documents/          # Diretório para armazenar documentos PDF
-        ├── pdf1.pdf
-        └── pdf2.pdf
-```
