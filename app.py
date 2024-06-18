@@ -58,5 +58,5 @@ if uploaded_files and question:
 
     results = rag_chain.invoke({"input": question})
 
-    st.write("Answer:")
+    st.write("Resposta:")
     st.write(results["answer"])
