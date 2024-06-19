@@ -15,11 +15,18 @@ from tempfile import NamedTemporaryFile
 
 os.environ["GROQ_API_KEY"] = "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"
 
-def load_pdfs(uploaded_files):
-    docs = []
+def save_pdfs(uploaded_files):
+    saved_files = []
     for uploaded_file in uploaded_files:
-        content = uploaded_file.getvalue()
-        loader = PyPDFLoader(content)
+        with NamedTemporaryFile(delete=False) as temp_file:
+            temp_file.write(uploaded_file.read())
+            saved_files.append(temp_file.name)
+    return saved_files
+
+def load_pdfs(file_paths):
+    docs = []
+    for file_path in file_paths:
+        loader = PyPDFLoader(file_path)
         docs.extend(loader.load())
     return docs
 
@@ -29,8 +36,11 @@ uploaded_files = st.file_uploader("Envie arquivos PDF", type="pdf", accept_multi
 question = st.text_input("Digite sua pergunta")
 
 if uploaded_files and question:
-    # Carregar documentos PDF
-    docs = load_pdfs(uploaded_files)
+    # Salvar arquivos PDF temporariamente
+    saved_files = save_pdfs(uploaded_files)
+
+    # Carregar documentos PDF a partir dos arquivos salvos
+    docs = load_pdfs(saved_files)
 
     llm = ChatGroq(model="llama3-8b-8192")
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
