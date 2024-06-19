@@ -18,14 +18,9 @@ os.environ["GROQ_API_KEY"] = "gsk_V1kNngpvAmSpQImE8ameWGdyb3FY14LvsvjFwQXrMDbSVg
 def load_pdfs(uploaded_files):
     docs = []
     for uploaded_file in uploaded_files:
-        with NamedTemporaryFile(delete=False) as temp_file:
-            temp_file.write(uploaded_file.read())
-            temp_file_path = temp_file.name
-
-        loader = PyPDFLoader(temp_file_path)
+        content = uploaded_file.getvalue()
+        loader = PyPDFLoader(content)
         docs.extend(loader.load())
-        os.remove(temp_file_path)
-
     return docs
 
 # Configuração da interface Streamlit
