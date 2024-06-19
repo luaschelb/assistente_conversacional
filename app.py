@@ -11,16 +11,22 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
-                                         
+from tempfile import NamedTemporaryFile
+
 os.environ["GROQ_API_KEY"] = "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"
-# Função para carregar documentos PDF
+
 def load_pdfs(uploaded_files):
     docs = []
     for uploaded_file in uploaded_files:
-        loader = PyPDFLoader(uploaded_file)
-        docs.extend(loader.load())
-    return docs
+        with NamedTemporaryFile(delete=False) as temp_file:
+            temp_file.write(uploaded_file.read())
+            temp_file_path = temp_file.name
 
+        loader = PyPDFLoader(temp_file_path)
+        docs.extend(loader.load())
+        os.remove(temp_file_path)
+
+    return docs
 
 # Configuração da interface Streamlit
 st.title("Assistente Conversacional baseado em LLM")
@@ -28,6 +34,7 @@ uploaded_files = st.file_uploader("Envie arquivos PDF", type="pdf", accept_multi
 question = st.text_input("Digite sua pergunta")
 
 if uploaded_files and question:
+    # Carregar documentos PDF
     docs = load_pdfs(uploaded_files)
 
     llm = ChatGroq(model="llama3-8b-8192")
