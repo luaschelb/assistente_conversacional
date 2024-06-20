@@ -6,4 +6,3 @@ langchain
 sentence-transformers
 langchain-huggingface
 streamlit
-pysqlite3-binary
