@@ -2,6 +2,8 @@
 
 Este é um projeto de assistente conversacional baseado em LLM (Language Model) que indexa vetores de documentos PDF para responder a perguntas através de uma interface de conversação.
 
+O Código está disponilizado online na plataforma HuggingFace Spaces no link: https://huggingface.co/spaces/luaschelb/assistente_conversacional
+
 ## Configuração do Ambiente de Desenvolvimento
 
 ### 1. Clonar o Repositório
